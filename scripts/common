@@ -1,5 +1,8 @@
 log (){
-	date +"[%T] $*" | tee -a "${LOG_FILE}"
+	local text=$*
+	local now=$(date +"[%T]")
+	echo -e "$now $BYellow${text}$Color_Off"
+	echo "$now $text" >> "${LOG_FILE}"
 }
 export -f log
 
