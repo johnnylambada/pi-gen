@@ -1,5 +1,7 @@
 #!/bin/bash -e
 
+source scripts/colors.sh
+
 # shellcheck disable=SC2119
 run_sub_stage()
 {
@@ -307,7 +309,9 @@ for STAGE_DIR in $STAGE_LIST; do
 done
 
 CLEAN=1
+log "Starting export"
 for EXPORT_DIR in ${EXPORT_DIRS}; do
+	log "EXPORT_DIR=${EXPORT_DIR}"
 	STAGE_DIR=${BASE_DIR}/export-image
 	# shellcheck source=/dev/null
 	source "${EXPORT_DIR}/EXPORT_IMAGE"
