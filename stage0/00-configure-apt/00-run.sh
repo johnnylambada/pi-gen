@@ -1,5 +1,7 @@
 #!/bin/bash -e
 
+[ ! -z "${DEBUG_SETX}" ] && set -x
+
 install -m 644 files/sources.list "${ROOTFS_DIR}/etc/apt/"
 install -m 644 files/raspi.list "${ROOTFS_DIR}/etc/apt/sources.list.d/"
 sed -i "s/RELEASE/${RELEASE}/g" "${ROOTFS_DIR}/etc/apt/sources.list"

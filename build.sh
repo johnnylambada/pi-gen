@@ -194,6 +194,9 @@ term() {
 
 trap term EXIT INT TERM
 
+export DEBUG_SETX
+[ ! -z "${DEBUG_SETX}" ] && set -x
+
 export PI_GEN=${PI_GEN:-pi-gen}
 export PI_GEN_REPO=${PI_GEN_REPO:-https://github.com/RPi-Distro/pi-gen}
 

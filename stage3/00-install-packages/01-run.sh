@@ -1,5 +1,7 @@
 #!/bin/bash -e
 
+[ ! -z "${DEBUG_SETX}" ] && set -x
+
 on_chroot << EOF
 update-alternatives --install /usr/bin/x-www-browser \
   x-www-browser /usr/bin/chromium-browser 86

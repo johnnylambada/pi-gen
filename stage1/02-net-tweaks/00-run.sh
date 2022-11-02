@@ -1,5 +1,7 @@
 #!/bin/bash -e
 
+[ ! -z "${DEBUG_SETX}" ] && set -x
+
 echo "${TARGET_HOSTNAME}" > "${ROOTFS_DIR}/etc/hostname"
 echo "127.0.1.1		${TARGET_HOSTNAME}" >> "${ROOTFS_DIR}/etc/hosts"
 

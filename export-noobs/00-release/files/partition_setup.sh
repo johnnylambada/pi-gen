@@ -1,6 +1,8 @@
 #!/bin/sh
 #supports_backup in PINN
 
+[ ! -z "${DEBUG_SETX}" ] && set -x
+
 set -ex
 
 # shellcheck disable=SC2154

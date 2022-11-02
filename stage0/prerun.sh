@@ -1,5 +1,7 @@
 #!/bin/bash -e
 
+[ ! -z "${DEBUG_SETX}" ] && set -x
+
 if [ "$RELEASE" != "bullseye" ]; then
 	echo "WARNING: RELEASE does not match the intended option for this branch."
 	echo "         Please check the relevant README.md section."

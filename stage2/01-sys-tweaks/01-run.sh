@@ -1,5 +1,7 @@
 #!/bin/bash -e
 
+[ ! -z "${DEBUG_SETX}" ] && set -x
+
 install -m 755 files/resize2fs_once	"${ROOTFS_DIR}/etc/init.d/"
 
 install -d				"${ROOTFS_DIR}/etc/systemd/system/rc-local.service.d"

@@ -1,5 +1,7 @@
 #!/bin/bash -eu
 
+[ ! -z "${DEBUG_SETX}" ] && set -x
+
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 BUILD_OPTS="$*"
