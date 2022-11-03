@@ -205,6 +205,12 @@ The following environment variables are supported:
 
     If set, then instead of working through the numeric stages in order, this list will be followed. For example setting to `"stage0 stage1 mystage stage2"` will run the contents of `mystage` before stage2. Note that quotes are needed around the list. An absolute or relative path can be given for stages outside the pi-gen directory.
 
+* `EXPORT_DIR` (Default: unset)
+
+    Can be set to export any stage without actually adding the EXPORT_IMAGE file to that stage. The part before the colon is the folder name to
+    export. The part after the colon is the name of the suffix.  For instance setting to `"stage1:-tiny"` will export the output of stage1 with
+    the name "-tiny" affixed to the end of the file name.
+
 A simple example for building Raspberry Pi OS:
 
 ```bash
