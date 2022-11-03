@@ -341,8 +341,12 @@ log "Starting export"
 for EXPORT_DIR in ${EXPORT_DIRS}; do
 	log "EXPORT_DIR=${EXPORT_DIR}"
 	STAGE_DIR=${BASE_DIR}/export-image
+	IMG_SUFFIX=${EXPORT_DIR#*:} # the -name part of stage1:-name
+	EXPORT_DIR=${EXPORT_DIR%:*} # the stage1 part of stage1:-name
 	# shellcheck source=/dev/null
-	source "${EXPORT_DIR}/EXPORT_IMAGE"
+	if [ -f "${EXPORT_DIR}/EXPORT_IMAGE" ]; then
+		source "${EXPORT_DIR}/EXPORT_IMAGE"
+	fi
 	EXPORT_ROOTFS_DIR=${WORK_DIR}/$(basename "${EXPORT_DIR}")/rootfs
 	if [ "${USE_QCOW2}" = "1" ]; then
 		USE_QCOW2=0
