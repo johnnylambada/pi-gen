@@ -411,7 +411,7 @@ for EXPORT_DIR in ${EXPORT_DIRS}; do
 	else
 		run_stage
 	fi
-	if [ "${USE_QEMU}" != "1" ]; then
+	if [ "${USE_QEMU}" != "1" -a -z "${NO_NOOBS}" ]; then
 		if [ -e "${EXPORT_DIR}/EXPORT_NOOBS" ]; then
 			# shellcheck source=/dev/null
 			source "${EXPORT_DIR}/EXPORT_NOOBS"
