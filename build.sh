@@ -44,7 +44,7 @@ EOF
 			fi
 			if [ -n "$PACKAGES" ]; then
 				on_chroot << EOF
-apt-get -o Acquire::Retries=3 install  --no-install-recommends -y $PACKAGES
+apt-get -o Acquire::Retries=3 install $RECOMMENDATIONS -y $PACKAGES
 EOF
 				if [ "${USE_QCOW2}" = "1" ]; then
 					on_chroot << EOF
@@ -216,6 +216,11 @@ export PI_GEN_REPO=${PI_GEN_REPO:-https://github.com/RPi-Distro/pi-gen}
 if [ -z "${IMG_NAME}" ]; then
 	echo "IMG_NAME not set" 1>&2
 	exit 1
+fi
+
+RECOMMENDATIONS=""
+if [ ! -z "${NO_RECOMMENDATIONS}" ]; then
+	RECOMMENDATIONS="--no-install-recommends"
 fi
 
 export USE_QEMU="${USE_QEMU:-0}"
