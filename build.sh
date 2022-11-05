@@ -21,6 +21,9 @@ EOF
 		if [ -f "${i}-packages-nr" ]; then
 			log "Begin ${SUB_STAGE_DIR}/${i}-packages-nr"
 			PACKAGES="$(sed -f "${SCRIPT_DIR}/remove-comments.sed" < "${i}-packages-nr")"
+			if [ ! -z "$CULLCMD" ]; then
+			   PACKAGES=$(echo " $PACKAGES " | sed "$CULLCMD" | sed 's/^ //;s/ $//')
+			fi
 			if [ -n "$PACKAGES" ]; then
 				on_chroot << EOF
 apt-get -o Acquire::Retries=3 install --no-install-recommends -y $PACKAGES
@@ -36,9 +39,12 @@ EOF
 		if [ -f "${i}-packages" ]; then
 			log "Begin ${SUB_STAGE_DIR}/${i}-packages"
 			PACKAGES="$(sed -f "${SCRIPT_DIR}/remove-comments.sed" < "${i}-packages")"
+			if [ ! -z "$CULLCMD" ]; then
+			   PACKAGES=$(echo " $PACKAGES " | sed "$CULLCMD" | sed 's/^ //;s/ $//')
+			fi
 			if [ -n "$PACKAGES" ]; then
 				on_chroot << EOF
-apt-get -o Acquire::Retries=3 install -y $PACKAGES
+apt-get -o Acquire::Retries=3 install  --no-install-recommends -y $PACKAGES
 EOF
 				if [ "${USE_QCOW2}" = "1" ]; then
 					on_chroot << EOF
@@ -196,6 +202,13 @@ trap term EXIT INT TERM
 
 export DEBUG_SETX
 [ ! -z "${DEBUG_SETX}" ] && set -x
+
+CULLCMD=""
+if [ ! -z "$CULL" ]; then
+  for PKG in $CULL; do
+	   CULLCMD="${CULLCMD}s/ $PKG / /g;"
+	done
+fi
 
 export PI_GEN=${PI_GEN:-pi-gen}
 export PI_GEN_REPO=${PI_GEN_REPO:-https://github.com/RPi-Distro/pi-gen}
