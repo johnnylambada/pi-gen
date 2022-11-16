@@ -113,6 +113,6 @@ xz)
 	--stdout "$IMG_FILE" > "${DEPLOY_DIR}/${ARCHIVE_FILENAME}${IMG_SUFFIX}.img.xz"
 	;;
 none | *)
-	cp "$IMG_FILE" "$DEPLOY_DIR/"
+	ln "$IMG_FILE" "$DEPLOY_DIR/"
 ;;
 esac
