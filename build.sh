@@ -316,6 +316,8 @@ for STAGE_DIR in $STAGE_LIST; do
 	run_stage
 done
 
+export EXPORT_DIRS=${FORCE_EXPORT_DIRS:-$EXPORT_DIRS}
+
 CLEAN=1
 log "Starting export"
 for EXPORT_DIR in ${EXPORT_DIRS}; do
